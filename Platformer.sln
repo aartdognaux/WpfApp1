@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27703.2000
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfApp1", "WpfApp1\WpfApp1.csproj", "{20A1A2B3-852C-4063-938F-E770CF6AB832}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Platformer", "WpfApp1\Platformer.csproj", "{20A1A2B3-852C-4063-938F-E770CF6AB832}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Platformer.Lib", "Platformer.Lib\Platformer.Lib.csproj", "{0B7E4FFE-67DB-4EA8-995E-9F0D5EB3D916}"
 EndProject
