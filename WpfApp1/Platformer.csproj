@@ -93,5 +93,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PlatformerLib\PlatformerLib.csproj">
+      <Project>{884efc27-d050-450b-bde9-6a08c49b8aa7}</Project>
+      <Name>PlatformerLib</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
