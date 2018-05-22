@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using PlatformerLib.Services;
+using GalgjeLib.Services;
 
-namespace PlatformerLib.Entities
+namespace GalgjeLib.Entities
 {
     public class Woord
     {

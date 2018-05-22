@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27703.2000
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Platformer", "WpfApp1\Platformer.csproj", "{20A1A2B3-852C-4063-938F-E770CF6AB832}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Galgje", "WpfApp1\Galgje.csproj", "{20A1A2B3-852C-4063-938F-E770CF6AB832}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlatformerLib", "PlatformerLib\PlatformerLib.csproj", "{884EFC27-D050-450B-BDE9-6A08C49B8AA7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GalgjeLib", "PlatformerLib\GalgjeLib.csproj", "{884EFC27-D050-450B-BDE9-6A08C49B8AA7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,4 +1,4 @@
-﻿using PlatformerLib.Entities;
+﻿using GalgjeLib.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +16,7 @@ using System.Windows.Shapes;
 
 
 
-namespace WpfApp1
+namespace Galgje
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -32,7 +32,8 @@ namespace WpfApp1
         char verborgen = '_';
         int AantalFouten = 0;
 
-         void AddButtons()
+
+        void AddButtons()
         {
             for (int letter = (int)'A'; letter <= (int)'Z'; letter++)
             {
@@ -56,12 +57,12 @@ namespace WpfApp1
             gezochtWoord = txtInput.Text;
             AddLabels();
             wrpLettersWrap.IsEnabled = true;
+            txtInput.Text = "";
         }
 
         void AddLabels()
         {
             wrpGezochtWoord.Children.Clear();
-            
             char[] woordChars = gezochtWoord.ToCharArray();
             int lengte = woordChars.Length;
             int refer = (int)wrpGezochtWoord.Width / lengte;
@@ -90,11 +91,15 @@ namespace WpfApp1
                 char[] charArray = gezochtWoord.ToCharArray();
                 for (int i = 0; i < gezochtWoord.Length; i++)
                 {
-                    if (charArray[i] == charClicked)
+                    if (charArray[i] != charClicked)
                     {
-                       // <<----- HIER MOETEN WE EEN MANIER VINDEN OM DE LETTERS TE VOORSCHIJN TE LATEN KOMEN
+
+                        // <<----- HIER MOETEN WE EEN MANIER VINDEN OM DE LETTERS TE VOORSCHIJN TE LATEN KOMEN
+
                     }
+                    
                 }
+               
 
             }
             else

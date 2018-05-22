@@ -7,8 +7,8 @@
     <ProjectGuid>{884EFC27-D050-450B-BDE9-6A08C49B8AA7}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>PlatformerLib</RootNamespace>
-    <AssemblyName>PlatformerLib</AssemblyName>
+    <RootNamespace>GalgjeLib</RootNamespace>
+    <AssemblyName>GalgjeLib</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

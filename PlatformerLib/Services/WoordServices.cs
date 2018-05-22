@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using PlatformerLib.Entities;
+using GalgjeLib.Entities;
 using System.Windows;
 using System.IO;
 
-namespace PlatformerLib.Services
+namespace GalgjeLib.Services
 {
     class WoordServices
     {
