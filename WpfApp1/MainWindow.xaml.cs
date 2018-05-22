@@ -27,7 +27,6 @@ namespace WpfApp1
         }
         string gezochtWoord;
         char verborgen = '_';
-        char parsedChar;
 
          void AddButtons()
         {
@@ -57,6 +56,8 @@ namespace WpfApp1
 
         void AddLabels()
         {
+            wrpGezochtWoord.Children.Clear();
+            
             char[] woordChars = gezochtWoord.ToCharArray();
             int lengte = woordChars.Length;
             int refer = (int)wrpGezochtWoord.Width / lengte;
@@ -72,24 +73,30 @@ namespace WpfApp1
             txtWoordLengte.Text = lengte.ToString();
         }
 
-        void b_Click (object sender, EventArgs e)
+        void b_Click(object sender, EventArgs e)
         {
             Button b = (Button)sender;
-            char charClicked = Convert.ToChar(b.Content);  
+            char charClicked = Convert.ToChar(b.Content);
             b.IsEnabled = false;
 
-            if ((gezochtWoord).Contains(charClicked))
+            if ((gezochtWoord = gezochtWoord.ToUpper()).Contains(charClicked))
             {
                 lblInfo.Content = "Juiste letter!";
+                lblInfo.Background = Brushes.LawnGreen;
                 char[] charArray = gezochtWoord.ToCharArray();
                 for (int i = 0; i < gezochtWoord.Length; i++)
                 {
                     if (charArray[i] == charClicked)
                     {
-                        
+                       // <<----- HIER MOETEN WE EEN MANIER VINDEN OM DE LETTERS TE VOORSCHIJN TE LATEN KOMEN
                     }
                 }
 
+            }
+            else
+            {
+                lblInfo.Content = "Foute letter!";
+                lblInfo.Background = Brushes.Brown;
             }
         }
     }
