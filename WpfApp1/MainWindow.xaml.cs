@@ -23,11 +23,74 @@ namespace WpfApp1
         public MainWindow()
         {
             InitializeComponent();
+            AddButtons();
+        }
+        string gezochtWoord;
+        char verborgen = '_';
+        char parsedChar;
+
+         void AddButtons()
+        {
+            for (int letter = (int)'A'; letter <= (int)'Z'; letter++)
+            {
+                Button b = new Button();
+                b.Content = ((char)letter).ToString();
+                b.Height = 40;
+                b.Width = 40;
+                b.FontSize = 20;
+                b.Background = Brushes.LawnGreen;
+                lettersWrap.Children.Add(b);
+
+
+                b.Click += b_Click; 
+            }
+
+            lettersWrap.IsEnabled = false;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void btnStart_Click(object sender, RoutedEventArgs e)
         {
+            gezochtWoord = txtInput.Text;
+            AddLabels();
+            lettersWrap.IsEnabled = true;
+        }
 
+        void AddLabels()
+        {
+            char[] woordChars = gezochtWoord.ToCharArray();
+            int lengte = woordChars.Length;
+            int refer = (int)wrpGezochtWoord.Width / lengte;
+            for (int i = 0; i < lengte; i++)
+            {
+                Label l = new Label();
+                l.FontSize = 30;
+                l.Content = verborgen;
+                l.BringIntoView();
+                wrpGezochtWoord.Children.Add(l);
+                
+            }
+            txtWoordLengte.Text = lengte.ToString();
+        }
+
+        void b_Click (object sender, EventArgs e)
+        {
+            Button b = (Button)sender;
+            char charClicked = Convert.ToChar(b.Content);  
+            b.IsEnabled = false;
+
+            if ((gezochtWoord).Contains(charClicked))
+            {
+                lblInfo.Content = "Juiste letter!";
+                char[] charArray = gezochtWoord.ToCharArray();
+                for (int i = 0; i < gezochtWoord.Length; i++)
+                {
+                    if (charArray[i] == charClicked)
+                    {
+                        
+                    }
+                }
+
+            }
         }
     }
 }
