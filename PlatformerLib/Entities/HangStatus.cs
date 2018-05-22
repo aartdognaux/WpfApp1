@@ -7,7 +7,7 @@ using PlatformerLib.Services;
 
 namespace PlatformerLib.Entities
 {
-    class HangStatus
+    public class HangStatus
     {
         public enum hangStatus
         {

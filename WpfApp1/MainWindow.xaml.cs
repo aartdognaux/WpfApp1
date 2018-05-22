@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PlatformerLib.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+
+
 
 namespace WpfApp1
 {
@@ -27,6 +30,7 @@ namespace WpfApp1
         }
         string gezochtWoord;
         char verborgen = '_';
+        int AantalFouten = 0;
 
          void AddButtons()
         {
@@ -38,20 +42,20 @@ namespace WpfApp1
                 b.Width = 40;
                 b.FontSize = 20;
                 b.Background = Brushes.LawnGreen;
-                lettersWrap.Children.Add(b);
+                wrpLettersWrap.Children.Add(b);
 
 
                 b.Click += b_Click; 
             }
 
-            lettersWrap.IsEnabled = false;
+            wrpLettersWrap.IsEnabled = false;
         }
 
         private void btnStart_Click(object sender, RoutedEventArgs e)
         {
             gezochtWoord = txtInput.Text;
             AddLabels();
-            lettersWrap.IsEnabled = true;
+            wrpLettersWrap.IsEnabled = true;
         }
 
         void AddLabels()
@@ -97,7 +101,27 @@ namespace WpfApp1
             {
                 lblInfo.Content = "Foute letter!";
                 lblInfo.Background = Brushes.Brown;
+                AantalFouten++;
+                lblAantalFouten.Content = AantalFouten.ToString();
             }
+
+            if (AantalFouten > 7)
+            {
+                Label GameOver = new Label();
+                GameOver.Height = 450;
+                GameOver.Width = 800;
+                GameOver.Content = "Game over!";
+                GameOver.HorizontalContentAlignment = HorizontalAlignment.Center;
+                GameOver.VerticalContentAlignment = VerticalAlignment.Center;
+                GameOver.FontSize = 100;
+                GameOver.Background = Brushes.Red;
+                grdAchtergrond.Children.Add(GameOver);
+
+
+            }
+
         }
+
+        
     }
 }

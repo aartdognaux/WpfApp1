@@ -6,14 +6,16 @@
         xmlns:local="clr-namespace:WpfApp1"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <WrapPanel x:Name="lettersWrap" HorizontalAlignment="Left" Height="130" Margin="5,279,0,0" VerticalAlignment="Top" Width="386"/>
-        <TextBox x:Name="txtInput" HorizontalAlignment="Left" Height="36" Margin="501,373,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="281"/>
-        <Label x:Name="lblTeRadenWoord" Content="Het te raden woord:" HorizontalAlignment="Left" Height="32" Margin="501,341,0,0" VerticalAlignment="Top" Width="169"/>
-        <Button x:Name="btnStart" Content="Start" HorizontalAlignment="Left" Height="27" Margin="690,341,0,0" VerticalAlignment="Top" Width="92" Click="btnStart_Click"/>
-        <WrapPanel x:Name="wrpGezochtWoord" HorizontalAlignment="Left" Height="56" Margin="16,21,0,0" VerticalAlignment="Top" Width="766"/>
-        <TextBox x:Name="txtWoordLengte" HorizontalAlignment="Left" Height="25" Margin="449,95,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="40"/>
-        <Label x:Name="lblWoordLengte" Content="Woord Lengte:" HorizontalAlignment="Left" Height="37" Margin="347,95,0,0" VerticalAlignment="Top" Width="97"/>
-        <Label x:Name="lblInfo" Content="" HorizontalAlignment="Left" Height="28" Margin="18,185,0,0" VerticalAlignment="Top" Width="173"/>
+    <Grid x:Name="grdAchtergrond">
+        <WrapPanel x:Name="wrpLettersWrap" HorizontalAlignment="Left" Height="130" Margin="2,279,0,0" VerticalAlignment="Top" Width="386" Grid.Column="1"/>
+        <TextBox x:Name="txtInput" HorizontalAlignment="Left" Height="36" Margin="445,373,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="281" Grid.Column="1"/>
+        <Label x:Name="lblTeRadenWoord" Content="Het te raden woord:" HorizontalAlignment="Left" Height="32" Margin="445,341,0,0" VerticalAlignment="Top" Width="169" Grid.Column="1"/>
+        <Button x:Name="btnStart" Content="Start" HorizontalAlignment="Left" Height="27" Margin="634,341,0,0" VerticalAlignment="Top" Width="92" Click="btnStart_Click" Grid.Column="1"/>
+        <WrapPanel x:Name="wrpGezochtWoord" HorizontalAlignment="Left" Height="56" Margin="3,21,0,0" VerticalAlignment="Top" Width="766" Grid.Column="1"/>
+        <TextBox x:Name="txtWoordLengte" HorizontalAlignment="Left" Height="25" Margin="393,95,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="40" Grid.Column="1"/>
+        <Label x:Name="lblWoordLengte" Content="Woord Lengte:" HorizontalAlignment="Left" Height="37" Margin="291,95,0,0" VerticalAlignment="Top" Width="97" Grid.Column="1"/>
+        <Label x:Name="lblInfo" Content="" HorizontalAlignment="Left" Height="28" Margin="1,185,0,0" VerticalAlignment="Top" Width="173" Grid.Column="1"/>
+        <WrapPanel x:Name="wrpGalg" HorizontalAlignment="Left" Height="274" Margin="445,10,0,0" VerticalAlignment="Top" Width="281" Grid.Column="1"/>
+        <Label x:Name="lblAantalFouten" Content="" HorizontalAlignment="Left" Margin="393,134,0,0" VerticalAlignment="Top" Width="40" Grid.Column="1" Height="26"/>
     </Grid>
 </Window>
