@@ -31,6 +31,7 @@ namespace Galgje
         string gezochtWoord;
         char verborgen = '_';
         int AantalFouten = 0;
+        List<Label> labels = new List<Label>();
 
 
         void AddButtons()
@@ -60,7 +61,7 @@ namespace Galgje
             txtInput.Text = "";
         }
 
-        void AddLabels()
+        public void AddLabels()
         {
             wrpGezochtWoord.Children.Clear();
             char[] woordChars = gezochtWoord.ToCharArray();
@@ -70,10 +71,11 @@ namespace Galgje
             {
                 Label l = new Label();
                 l.FontSize = 30;
-                l.Content = verborgen;
+                l.Content = verborgen;  // <<<-------- = woordChars[i] geeft alle letters weer ipv underscores
                 l.BringIntoView();
                 wrpGezochtWoord.Children.Add(l);
-                
+                labels.Add(l);
+               
             }
             txtWoordLengte.Text = lengte.ToString();
         }
@@ -91,11 +93,9 @@ namespace Galgje
                 char[] charArray = gezochtWoord.ToCharArray();
                 for (int i = 0; i < gezochtWoord.Length; i++)
                 {
-                    if (charArray[i] != charClicked)
+                    if (charArray[i] == charClicked)
                     {
-
-                        // <<----- HIER MOETEN WE EEN MANIER VINDEN OM DE LETTERS TE VOORSCHIJN TE LATEN KOMEN
-
+                        labels[i].Content = charClicked.ToString();
                     }
                     
                 }
@@ -127,6 +127,25 @@ namespace Galgje
 
         }
 
-        
+        private void btnGok_Click(object sender, RoutedEventArgs e)
+        {
+            char letter = txtLetterInvullen.Text.ToCharArray()[0];
+            if (!char.IsLetter(letter))
+            {
+                MessageBox.Show("Je mag enkels letters invoeren!", "Error!", MessageBoxButton.OK);
+                return;
+            }
+            if ((gezochtWoord = gezochtWoord.ToUpper()).Contains(letter))
+            {
+                char[] letters = gezochtWoord.ToCharArray();
+                for (int i = 0; i < letters.Length; i++)
+                {
+                    if (letters[i] == letter)
+                    {
+                        labels[i].Content = letter.ToString();
+                    }
+                }
+            }
+        }
     }
 }

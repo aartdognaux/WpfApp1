@@ -17,5 +17,7 @@
         <Label x:Name="lblInfo" Content="" HorizontalAlignment="Left" Height="28" Margin="1,185,0,0" VerticalAlignment="Top" Width="173" Grid.Column="1"/>
         <WrapPanel x:Name="wrpGalg" HorizontalAlignment="Left" Height="274" Margin="445,10,0,0" VerticalAlignment="Top" Width="281" Grid.Column="1"/>
         <Label x:Name="lblAantalFouten" Content="" HorizontalAlignment="Left" Margin="393,134,0,0" VerticalAlignment="Top" Width="40" Grid.Column="1" Height="26"/>
+        <TextBox x:Name="txtLetterInvullen" HorizontalAlignment="Left" Height="36" Margin="319,238,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="51"/>
+        <Button x:Name="btnGok" Content="Gok!" HorizontalAlignment="Left" Height="36" Margin="266,238,0,0" VerticalAlignment="Top" Width="48" Click="btnGok_Click"/>
     </Grid>
 </Window>
