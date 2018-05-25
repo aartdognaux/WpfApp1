@@ -7,11 +7,8 @@ using GalgjeLib.Services;
 
 namespace GaljeLib.Entities
 {
-    public class HangStatus
+    public enum HangStatus
     {
-        public enum hangStatus
-        {
-            Geen, Paal, Touw, Hoofd, Lichaam, LinkerHand, RechterHand, LinkerBeen, RechterBeen
-        }
+        Geen, Paal, Touw, Hoofd, Lichaam, LinkerHand, RechterHand, LinkerBeen, RechterBeen
     }
 }
