@@ -13,6 +13,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Net;
+using GalgjeLib.Services;
+using GalgjeLib.Entities;
 
 
 
@@ -23,61 +26,94 @@ namespace Galgje
     /// </summary>
     public partial class MainWindow : Window
     {
+
+        WoordServices WilkeurigWoord = new WoordServices();
+        ControlsServices controlsServices = new ControlsServices();
         public MainWindow()
         {
             InitializeComponent();
-            AddButtons();
+            MaakButtons();
+
         }
-        string gezochtWoord;
+
+        public string gezochtWoord;
         char verborgen = '_';
         int AantalFouten = 0;
         List<Label> labels = new List<Label>();
+        List<Button> buttons = new List<Button>();
 
 
-        void AddButtons()
+        //void AddButtons(WrapPanel doel)
+        //{
+        //    for (int letter = (int)'A'; letter <= (int)'Z'; letter++)
+        //    {
+        //        Button b = new Button();
+        //        b.Content = ((char)letter).ToString();
+        //        b.Height = 40;
+        //        b.Width = 40;
+        //        b.FontSize = 20;
+        //        b.Background = Brushes.LawnGreen;
+        //        doel.Children.Add(b);
+        //        buttons.Add(b);
+        //    }
+
+        //    //wrpLettersWrap.IsEnabled = false;
+        //}
+
+        //public void AddLabels(WrapPanel doel)
+        //{
+        //    wrpGezochtWoord.Children.Clear();
+        //    char[] woordChars = gezochtWoord.ToCharArray();
+        //    int lengte = woordChars.Length;
+        //    int refer = (int)wrpGezochtWoord.Width / lengte;
+        //    for (int i = 0; i < lengte; i++)
+        //    {
+        //        Label l = new Label();
+        //        l.FontSize = 30;
+        //        l.Content = verborgen;  // <<<-------- = woordChars[i] geeft alle letters weer ipv underscores
+        //        l.BringIntoView();
+        //        wrpGezochtWoord.Children.Add(l);
+        //        labels.Add(l);
+
+        //    }
+        //    txtWoordLengte.Text = lengte.ToString();
+        //}
+
+        public void ResetGame()
         {
-            for (int letter = (int)'A'; letter <= (int)'Z'; letter++)
+            wrpGezochtWoord.Children.Clear();
+            wrpLettersWrap.Children.Clear();
+            AantalFouten = 0;
+            lblAantalFouten.Content = "0";
+            labels.Clear();
+            buttons.Clear();
+            
+            gezochtWoord = WoordServices.RandomWoord();
+            MaakLabels();
+            MaakButtons();
+
+        }
+
+        void MaakButtons()
+        {
+            controlsServices.AddButtons(wrpLettersWrap);
+            foreach (Button b in controlsServices.Buttons)
             {
-                Button b = new Button();
-                b.Content = ((char)letter).ToString();
-                b.Height = 40;
-                b.Width = 40;
-                b.FontSize = 20;
-                b.Background = Brushes.LawnGreen;
-                wrpLettersWrap.Children.Add(b);
-
-
-                b.Click += b_Click; 
+                 b.Click += b_Click;
             }
+        }
 
-            wrpLettersWrap.IsEnabled = false;
+        void MaakLabels()
+        {
+            controlsServices.AddLabels(wrpGezochtWoord, gezochtWoord, txtWoordLengte);
         }
 
         private void btnStart_Click(object sender, RoutedEventArgs e)
         {
-            gezochtWoord = txtInput.Text;
-            AddLabels();
+            gezochtWoord = WoordServices.RandomWoord();
+            MaakLabels();
             wrpLettersWrap.IsEnabled = true;
             txtInput.Text = "";
-        }
-
-        public void AddLabels()
-        {
-            wrpGezochtWoord.Children.Clear();
-            char[] woordChars = gezochtWoord.ToCharArray();
-            int lengte = woordChars.Length;
-            int refer = (int)wrpGezochtWoord.Width / lengte;
-            for (int i = 0; i < lengte; i++)
-            {
-                Label l = new Label();
-                l.FontSize = 30;
-                l.Content = verborgen;  // <<<-------- = woordChars[i] geeft alle letters weer ipv underscores
-                l.BringIntoView();
-                wrpGezochtWoord.Children.Add(l);
-                labels.Add(l);
-               
-            }
-            txtWoordLengte.Text = lengte.ToString();
         }
 
         void b_Click(object sender, EventArgs e)
@@ -91,15 +127,14 @@ namespace Galgje
                 lblInfo.Content = "Juiste letter!";
                 lblInfo.Background = Brushes.LawnGreen;
                 char[] charArray = gezochtWoord.ToCharArray();
-                for (int i = 0; i < gezochtWoord.Length; i++)
+                for (int i = 0; i < gezochtWoord.Length - 1; i++)
                 {
                     if (charArray[i] == charClicked)
                     {
-                        labels[i].Content = charClicked.ToString();
+                        controlsServices.Labels[i].Content = charClicked.ToString();
                     }
                     
                 }
-               
 
             }
             else
@@ -124,28 +159,12 @@ namespace Galgje
 
 
             }
-
+            // vul hier content van labels in
         }
 
-        private void btnGok_Click(object sender, RoutedEventArgs e)
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
-            char letter = txtLetterInvullen.Text.ToCharArray()[0];
-            if (!char.IsLetter(letter))
-            {
-                MessageBox.Show("Je mag enkels letters invoeren!", "Error!", MessageBoxButton.OK);
-                return;
-            }
-            if ((gezochtWoord = gezochtWoord.ToUpper()).Contains(letter))
-            {
-                char[] letters = gezochtWoord.ToCharArray();
-                for (int i = 0; i < letters.Length; i++)
-                {
-                    if (letters[i] == letter)
-                    {
-                        labels[i].Content = letter.ToString();
-                    }
-                }
-            }
+            ResetGame();
         }
     }
 }
