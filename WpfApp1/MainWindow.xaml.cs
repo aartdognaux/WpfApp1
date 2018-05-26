@@ -31,6 +31,7 @@ namespace Galgje
         string gezochtWoord;
         char verborgen = '_';
         int AantalFouten = 0;
+        List<Label> labels = new List<Label>();
 
 
         void AddButtons()
@@ -55,36 +56,31 @@ namespace Galgje
         private void btnStart_Click(object sender, RoutedEventArgs e)
         {
             gezochtWoord = txtInput.Text;
-            //AddLabels();
+            AddLabels();
             wrpLettersWrap.IsEnabled = true;
             txtInput.Text = "";
-            vulTextBox();
         }
 
-        void vulTextBox()
+        public void AddLabels()
         {
-            txbOplossing.Text = gezochtWoord;
+            wrpGezochtWoord.Children.Clear();
+            char[] woordChars = gezochtWoord.ToCharArray();
+            int lengte = woordChars.Length;
+            int refer = (int)wrpGezochtWoord.Width / lengte;
+            for (int i = 0; i < lengte; i++)
+            {
+                Label l = new Label();
+                l.FontSize = 30;
+                l.Content = verborgen;  // <<<-------- = woordChars[i] geeft alle letters weer ipv underscores
+                l.BringIntoView();
+                wrpGezochtWoord.Children.Add(l);
+                labels.Add(l);
+               
+            }
+            txtWoordLengte.Text = lengte.ToString();
         }
-        //public void AddLabels()
-        //{
-        //    wrpGezochtWoord.Children.Clear();
-        //    char[] woordChars = gezochtWoord.ToCharArray();
-        //    int lengte = woordChars.Length;
-        //    int refer = (int)wrpGezochtWoord.Width / lengte;
-        //    for (int i = 0; i < lengte; i++)
-        //    {
-        //        Label l = new Label();
-        //        l.FontSize = 30;
-        //        l.Content = verborgen;
-        //        l.BringIntoView();
-        //        l.Name = "characterLabel" + i.ToString();
-        //        wrpGezochtWoord.Children.Add(l);
-                
-        //    }
-        //    txtWoordLengte.Text = lengte.ToString();
-        //}
 
-        public void b_Click(object sender, EventArgs e)
+        void b_Click(object sender, EventArgs e)
         {
             Button b = (Button)sender;
             char charClicked = Convert.ToChar(b.Content);
@@ -99,10 +95,7 @@ namespace Galgje
                 {
                     if (charArray[i] == charClicked)
                     {
-                      
-                        
-                        // <<----- HIER MOETEN WE EEN MANIER VINDEN OM DE LETTERS TE VOORSCHIJN TE LATEN KOMEN
-
+                        labels[i].Content = charClicked.ToString();
                     }
                     
                 }
@@ -134,6 +127,25 @@ namespace Galgje
 
         }
 
-        
+        private void btnGok_Click(object sender, RoutedEventArgs e)
+        {
+            char letter = txtLetterInvullen.Text.ToCharArray()[0];
+            if (!char.IsLetter(letter))
+            {
+                MessageBox.Show("Je mag enkels letters invoeren!", "Error!", MessageBoxButton.OK);
+                return;
+            }
+            if ((gezochtWoord = gezochtWoord.ToUpper()).Contains(letter))
+            {
+                char[] letters = gezochtWoord.ToCharArray();
+                for (int i = 0; i < letters.Length; i++)
+                {
+                    if (letters[i] == letter)
+                    {
+                        labels[i].Content = letter.ToString();
+                    }
+                }
+            }
+        }
     }
 }
