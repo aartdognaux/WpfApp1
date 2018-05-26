@@ -55,30 +55,36 @@ namespace Galgje
         private void btnStart_Click(object sender, RoutedEventArgs e)
         {
             gezochtWoord = txtInput.Text;
-            AddLabels();
+            //AddLabels();
             wrpLettersWrap.IsEnabled = true;
             txtInput.Text = "";
+            vulTextBox();
         }
 
-        void AddLabels()
+        void vulTextBox()
         {
-            wrpGezochtWoord.Children.Clear();
-            char[] woordChars = gezochtWoord.ToCharArray();
-            int lengte = woordChars.Length;
-            int refer = (int)wrpGezochtWoord.Width / lengte;
-            for (int i = 0; i < lengte; i++)
-            {
-                Label l = new Label();
-                l.FontSize = 30;
-                l.Content = verborgen;
-                l.BringIntoView();
-                wrpGezochtWoord.Children.Add(l);
-                
-            }
-            txtWoordLengte.Text = lengte.ToString();
+            txbOplossing.Text = gezochtWoord;
         }
+        //public void AddLabels()
+        //{
+        //    wrpGezochtWoord.Children.Clear();
+        //    char[] woordChars = gezochtWoord.ToCharArray();
+        //    int lengte = woordChars.Length;
+        //    int refer = (int)wrpGezochtWoord.Width / lengte;
+        //    for (int i = 0; i < lengte; i++)
+        //    {
+        //        Label l = new Label();
+        //        l.FontSize = 30;
+        //        l.Content = verborgen;
+        //        l.BringIntoView();
+        //        l.Name = "characterLabel" + i.ToString();
+        //        wrpGezochtWoord.Children.Add(l);
+                
+        //    }
+        //    txtWoordLengte.Text = lengte.ToString();
+        //}
 
-        void b_Click(object sender, EventArgs e)
+        public void b_Click(object sender, EventArgs e)
         {
             Button b = (Button)sender;
             char charClicked = Convert.ToChar(b.Content);
@@ -91,9 +97,10 @@ namespace Galgje
                 char[] charArray = gezochtWoord.ToCharArray();
                 for (int i = 0; i < gezochtWoord.Length; i++)
                 {
-                    if (charArray[i] != charClicked)
+                    if (charArray[i] == charClicked)
                     {
-
+                      
+                        
                         // <<----- HIER MOETEN WE EEN MANIER VINDEN OM DE LETTERS TE VOORSCHIJN TE LATEN KOMEN
 
                     }
