@@ -64,7 +64,9 @@ namespace GalgjeLib.Services
         {
             doel.Children.Clear();
             char[] woordChars = gezochtWoord.ToCharArray();
-            int lengte = woordChars.Length - 1;
+
+            int lengte = woordChars.Length -1;
+
             for (int i = 0; i < lengte; i++)
             {
                 Label l = new Label();
