@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows;
 
 namespace GalgjeLib.Services
 {
@@ -13,7 +14,10 @@ namespace GalgjeLib.Services
 
         //public List<Button> buttons;
         public List<Button> Buttons { get; set; }
+        public Button StartNewGame { get; set; }
+        public Button RestartNewGame { get; set; }
         public List<Label> Labels { get; set; }
+        public bool antwoordCorrect { get; set; }
         public ControlsServices()
         {
             Buttons = new List<Button>();
@@ -35,6 +39,26 @@ namespace GalgjeLib.Services
             //wrpLettersWrap.IsEnabled = false;
         }
 
+        public bool ControleerLabels()
+        {
+            antwoordCorrect = true;
+            foreach (Label label in Labels)
+            {
+                if (label.Content == "_")
+                {
+                    antwoordCorrect = true;
+                }
+                else
+                {
+                    antwoordCorrect = false;
+                }   
+            }
+            return antwoordCorrect;
+
+
+
+        }
+
         public void AddLabels(WrapPanel doel, string gezochtWoord, TextBox groot)
         {
             doel.Children.Clear();
@@ -53,5 +77,80 @@ namespace GalgjeLib.Services
             groot.Text = lengte.ToString();
 
         }
+
+        public void StartScherm(Grid gridDoel)
+        {
+            Label StartLabel = new Label();
+            StartLabel.Height = 450;
+            StartLabel.Width = 800;
+            StartLabel.HorizontalContentAlignment = HorizontalAlignment.Center;
+            StartLabel.VerticalContentAlignment = VerticalAlignment.Center; 
+            StartLabel.Background = Brushes.Green;
+            gridDoel.Children.Add(StartLabel);
+
+            Label Galgje = new Label();
+            Galgje.Height = 200;
+            Galgje.Width = 400;
+            Galgje.Content = "Galgje";
+            Galgje.VerticalAlignment = VerticalAlignment.Top;
+            Galgje.Margin = new Thickness(0, 20, 0, 0);
+            Galgje.HorizontalContentAlignment = HorizontalAlignment.Center;
+            Galgje.VerticalContentAlignment = VerticalAlignment.Center;
+            Galgje.FontSize = 100;
+            gridDoel.Children.Add(Galgje);
+
+            Button StartSpel = new Button();
+           
+            StartSpel.Height = 50;
+            StartSpel.Width = 200;
+            StartSpel.Content = "New Game";
+            StartSpel.HorizontalAlignment = HorizontalAlignment.Center;
+            StartSpel.VerticalAlignment = VerticalAlignment.Top;
+            StartSpel.FontSize = 30;
+            StartSpel.Margin = new Thickness(0, 220, 0, 0);
+            StartSpel.HorizontalContentAlignment = HorizontalAlignment.Center;
+            StartSpel.VerticalContentAlignment = VerticalAlignment.Center;
+            gridDoel.Children.Add(StartSpel);
+            StartNewGame = StartSpel;
+    
+            
+        }
+
+        public void Winsituatie(Grid gridDoel,string winOrLose)
+        {
+            Label StartLabel = new Label();
+            StartLabel.Height = 450;
+            StartLabel.Width = 800;
+            StartLabel.HorizontalContentAlignment = HorizontalAlignment.Center;
+            StartLabel.VerticalContentAlignment = VerticalAlignment.Center;
+            StartLabel.Background = Brushes.Green;
+            gridDoel.Children.Add(StartLabel);
+
+            Label Galgje = new Label();
+            Galgje.Height = 200;
+            Galgje.Width = 800;
+            Galgje.Content = winOrLose;
+            Galgje.VerticalAlignment = VerticalAlignment.Top;
+            Galgje.Margin = new Thickness(0, 20, 0, 0);
+            Galgje.HorizontalContentAlignment = HorizontalAlignment.Center;
+            Galgje.VerticalContentAlignment = VerticalAlignment.Center;
+            Galgje.FontSize = 100;
+            gridDoel.Children.Add(Galgje);
+
+            Button StartSpel = new Button();
+
+            StartSpel.Height = 50;
+            StartSpel.Width = 300;
+            StartSpel.Content = "Restart New Game";
+            StartSpel.HorizontalAlignment = HorizontalAlignment.Center;
+            StartSpel.VerticalAlignment = VerticalAlignment.Top;
+            StartSpel.FontSize = 30;
+            StartSpel.Margin = new Thickness(0, 220, 0, 0);
+            StartSpel.HorizontalContentAlignment = HorizontalAlignment.Center;
+            StartSpel.VerticalContentAlignment = VerticalAlignment.Center;
+            gridDoel.Children.Add(StartSpel);
+            RestartNewGame = StartSpel;
+        }
+
     }
 }

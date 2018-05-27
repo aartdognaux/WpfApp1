@@ -27,70 +27,49 @@ namespace Galgje
     public partial class MainWindow : Window
     {
 
-        WoordServices WilkeurigWoord = new WoordServices();
-        ControlsServices controlsServices = new ControlsServices();
         public MainWindow()
         {
             InitializeComponent();
             MaakButtons();
+            controlsServices.StartScherm(grdAchtergrond);
+            controlsServices.StartNewGame.Click += NewGameButton_Click;
+            
 
         }
 
+        public GameEngine NieuwSpel;
+        WoordServices WilkeurigWoord = new WoordServices();
+        ControlsServices controlsServices = new ControlsServices();
         public string gezochtWoord;
-        char verborgen = '_';
-        int AantalFouten = 0;
         List<Label> labels = new List<Label>();
         List<Button> buttons = new List<Button>();
 
+         
 
-        //void AddButtons(WrapPanel doel)
-        //{
-        //    for (int letter = (int)'A'; letter <= (int)'Z'; letter++)
-        //    {
-        //        Button b = new Button();
-        //        b.Content = ((char)letter).ToString();
-        //        b.Height = 40;
-        //        b.Width = 40;
-        //        b.FontSize = 20;
-        //        b.Background = Brushes.LawnGreen;
-        //        doel.Children.Add(b);
-        //        buttons.Add(b);
-        //    }
 
-        //    //wrpLettersWrap.IsEnabled = false;
-        //}
+        void NewGame()
+        {
+            ResetGame();
+            wrpLettersWrap.IsEnabled = true;
+            txtInput.Text = "";
+            
 
-        //public void AddLabels(WrapPanel doel)
-        //{
-        //    wrpGezochtWoord.Children.Clear();
-        //    char[] woordChars = gezochtWoord.ToCharArray();
-        //    int lengte = woordChars.Length;
-        //    int refer = (int)wrpGezochtWoord.Width / lengte;
-        //    for (int i = 0; i < lengte; i++)
-        //    {
-        //        Label l = new Label();
-        //        l.FontSize = 30;
-        //        l.Content = verborgen;  // <<<-------- = woordChars[i] geeft alle letters weer ipv underscores
-        //        l.BringIntoView();
-        //        wrpGezochtWoord.Children.Add(l);
-        //        labels.Add(l);
 
-        //    }
-        //    txtWoordLengte.Text = lengte.ToString();
-        //}
+        }
 
         public void ResetGame()
         {
             wrpGezochtWoord.Children.Clear();
-            wrpLettersWrap.Children.Clear();
-            AantalFouten = 0;
+            wrpLettersWrap.Children.Clear(); 
             lblAantalFouten.Content = "0";
             controlsServices.Labels.Clear();
             controlsServices.Buttons.Clear();
-            
             gezochtWoord = WoordServices.RandomWoord();
             MaakButtons();
             MaakLabels();
+            NieuwSpel = new GameEngine(gezochtWoord);
+            imgGalg.Source = NieuwSpel.GalgOpbouwen();
+
 
 
         }
@@ -111,56 +90,74 @@ namespace Galgje
 
         private void btnStart_Click(object sender, RoutedEventArgs e)
         {
-            gezochtWoord = WoordServices.RandomWoord();
-            MaakLabels();
-            wrpLettersWrap.IsEnabled = true;
-            txtInput.Text = "";
+            ResetGame();
         }
 
-        void b_Click(object sender, EventArgs e)
+
+        void NewGameButton_Click(object sender, RoutedEventArgs e)
+        {
+
+            NewGame();
+            grdAchtergrond.Children.Clear(); 
+        }
+
+        void RestartNewGameButton_Click(object sender, RoutedEventArgs e)
+        {
+
+            NewGame();
+            grdAchtergrond.Children.Clear();
+        }
+
+        void GameEnd(string winOrLose)
+        {
+            controlsServices.Winsituatie(grdAchtergrond, winOrLose);
+            controlsServices.RestartNewGame.Click += RestartNewGameButton_Click;
+        }
+
+        void b_Click(object sender, RoutedEventArgs e)
         {
             Button b = (Button)sender;
-            char charClicked = Convert.ToChar(b.Content);
+            string charClicked = b.Content.ToString();
             b.IsEnabled = false;
 
-            if ((gezochtWoord = gezochtWoord.ToUpper()).Contains(charClicked))
+            int[] a = NieuwSpel.Character(charClicked[0]);
+            
+
+            for (int i = 0; i < a.Length; i++)
             {
-                lblInfo.Content = "Juiste letter!";
-                lblInfo.Background = Brushes.LawnGreen;
-                char[] charArray = gezochtWoord.ToCharArray();
-                for (int i = 0; i < gezochtWoord.Length - 1; i++)
+                if (a[i] == 1)
                 {
-                    if (charArray[i] == charClicked)
-                    {
-                        controlsServices.Labels[i].Content = charClicked.ToString();
-                    }
-                    
+                    controlsServices.Labels[i].Content = NieuwSpel.Word[i].ToString();
+                    lblInfo.Content = "Juiste letter!";
+                    lblInfo.Background = Brushes.LawnGreen;
+                }
+                else
+                {
+                    lblInfo.Content = "Foute letter!";
+                    lblInfo.Background = Brushes.Brown;
                 }
 
+
+            }
+            lblAantalFouten.Content = NieuwSpel.Level.ToString();
+            imgGalg.Source = NieuwSpel.GalgOpbouwen();
+            controlsServices.ControleerLabels();
+
+
+
+            if (controlsServices.antwoordCorrect == false )
+            {
+                GameEnd("Winner Winner Chicken Dinner"); 
+            }
+            else if (NieuwSpel.GameOver())
+            {
+                GameEnd("You hang!");
             }
             else
             {
-                lblInfo.Content = "Foute letter!";
-                lblInfo.Background = Brushes.Brown;
-                AantalFouten++;
-                lblAantalFouten.Content = AantalFouten.ToString();
+                (sender as Button).IsEnabled = false;
             }
 
-            if (AantalFouten > 7)
-            {
-                Label GameOver = new Label();
-                GameOver.Height = 450;
-                GameOver.Width = 800;
-                GameOver.Content = "Game over!";
-                GameOver.HorizontalContentAlignment = HorizontalAlignment.Center;
-                GameOver.VerticalContentAlignment = VerticalAlignment.Center;
-                GameOver.FontSize = 100;
-                GameOver.Background = Brushes.Red;
-                grdAchtergrond.Children.Add(GameOver);
-
-
-            }
-            // vul hier content van labels in
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
