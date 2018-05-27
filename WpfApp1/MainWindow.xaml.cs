@@ -85,12 +85,13 @@ namespace Galgje
             wrpLettersWrap.Children.Clear();
             AantalFouten = 0;
             lblAantalFouten.Content = "0";
-            labels.Clear();
-            buttons.Clear();
+            controlsServices.Labels.Clear();
+            controlsServices.Buttons.Clear();
             
             gezochtWoord = WoordServices.RandomWoord();
-            MaakLabels();
             MaakButtons();
+            MaakLabels();
+
 
         }
 
