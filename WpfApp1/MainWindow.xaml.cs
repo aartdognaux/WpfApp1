@@ -123,7 +123,7 @@ namespace Galgje
             int[] a = NieuwSpel.Character(charClicked[0]);
             
 
-            for (int i = 0; i < a.Length; i++)
+            for (int i = 0; i < a.Length - 1; i++)
             {
                 if (a[i] == 1)
                 {

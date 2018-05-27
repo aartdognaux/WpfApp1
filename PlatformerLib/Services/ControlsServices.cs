@@ -44,9 +44,10 @@ namespace GalgjeLib.Services
             antwoordCorrect = true;
             foreach (Label label in Labels)
             {
-                if (label.Content == "_")
+                if ((string)label.Content == "_")
                 {
                     antwoordCorrect = true;
+                    break;
                 }
                 else
                 {
@@ -64,7 +65,7 @@ namespace GalgjeLib.Services
             doel.Children.Clear();
             char[] woordChars = gezochtWoord.ToCharArray();
             int lengte = woordChars.Length;
-            for (int i = 0; i < lengte; i++)
+            for (int i = 0; i < lengte - 1; i++)
             {
                 Label l = new Label();
                 l.FontSize = 30;
