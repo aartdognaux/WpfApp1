@@ -40,11 +40,9 @@ namespace Galgje
         public GameEngine NieuwSpel;
         WoordServices WilkeurigWoord = new WoordServices();
         ControlsServices controlsServices = new ControlsServices();
-        public string gezochtWoord;
+        public string gezochtWoord =  "Galgje";
         List<Label> labels = new List<Label>();
         List<Button> buttons = new List<Button>();
-
-         
 
 
         void NewGame()
@@ -53,8 +51,6 @@ namespace Galgje
             wrpLettersWrap.IsEnabled = true;
             txtInput.Text = "";
             gezochtWoord = WoordServices.NederlandsWoord();
-
-
 
         }
 
@@ -65,13 +61,10 @@ namespace Galgje
             lblAantalFouten.Content = "0";
             controlsServices.Labels.Clear();
             controlsServices.Buttons.Clear();
-            gezochtWoord = WoordServices.NederlandsWoord();
             MaakButtons();
             MaakLabels();
             NieuwSpel = new GameEngine(gezochtWoord);
             imgGalg.Source = NieuwSpel.GalgOpbouwen();
-
-
 
         }
 
@@ -89,40 +82,41 @@ namespace Galgje
             controlsServices.AddLabels(wrpGezochtWoord, gezochtWoord, txtWoordLengte);
         }
 
-        private void btnStart_Click(object sender, RoutedEventArgs e)
-        {
-            wrpGezochtWoord.Children.Clear();
-            wrpLettersWrap.Children.Clear();
-            lblAantalFouten.Content = "0";
-            controlsServices.Labels.Clear();
-            controlsServices.Buttons.Clear();
-            gezochtWoord = txtInput.Text + "A"; // <---- Deze A zet ik hier, omdat de code altijd 1 character verwijderd aan het einde, om de lijst te kunnen lezen
-            MaakButtons();
-            MaakLabels();
-            txtInput.Text = "";
-            NieuwSpel = new GameEngine(gezochtWoord);
-            imgGalg.Source = NieuwSpel.GalgOpbouwen();
-        }
 
+        void GameEnd(string winOrLose)
+        {
+            controlsServices.Winsituatie(grdAchtergrond, winOrLose);
+            controlsServices.RestartNewGame.Click += RestartNewGameButton_Click;
+        }
 
         void NewGameButton_Click(object sender, RoutedEventArgs e)
         {
-
             NewGame();
             grdAchtergrond.Children.Clear(); 
         }
 
         void RestartNewGameButton_Click(object sender, RoutedEventArgs e)
         {
-
             NewGame();
             grdAchtergrond.Children.Clear();
         }
 
-        void GameEnd(string winOrLose)
+        void BtnZelfgekozenWoord_Click(object sender, RoutedEventArgs e)
         {
-            controlsServices.Winsituatie(grdAchtergrond, winOrLose);
-            controlsServices.RestartNewGame.Click += RestartNewGameButton_Click;
+            gezochtWoord = txtInput.Text + "A"; // <---- Deze A zet ik hier, omdat de code altijd 1 character verwijderd aan het einde, om de lijst te kunnen lezen
+            ResetGame();
+        }
+
+        void BtnEngels_Click(object sender, RoutedEventArgs e)
+        {
+            gezochtWoord = WoordServices.RandomWoord();
+            ResetGame();
+        }
+
+        void BtnNederlands_Click(object sender, RoutedEventArgs e)
+        {
+            gezochtWoord = WoordServices.NederlandsWoord();
+            ResetGame();
         }
 
         void b_Click(object sender, RoutedEventArgs e)
@@ -131,10 +125,10 @@ namespace Galgje
             string charClicked = b.Content.ToString();
             b.IsEnabled = false;
 
-            int[] a = NieuwSpel.Character(charClicked[0]);
+            int[] a = NieuwSpel.Character(charClicked[0], lblInfo);
             
 
-            for (int i = 0; i < a.Length - 1; i++)
+            for (int i = 0; i < a.Length -1; i++)
             {
                 if (a[i] == 1)
                 {
@@ -142,11 +136,7 @@ namespace Galgje
                     lblInfo.Content = "Juiste letter!";
                     lblInfo.Background = Brushes.LawnGreen;
                 }
-                else
-                {
-                    lblInfo.Content = "Foute letter!";
-                    lblInfo.Background = Brushes.Brown;
-                }
+
 
 
             }
@@ -158,7 +148,7 @@ namespace Galgje
 
             if (controlsServices.antwoordCorrect == false )
             {
-                GameEnd("Winner Winner Chicken Dinner"); 
+                GameEnd("Winner"); 
             }
             else if (NieuwSpel.GameOver())
             {
@@ -171,24 +161,6 @@ namespace Galgje
 
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            wrpGezochtWoord.Children.Clear();
-            wrpLettersWrap.Children.Clear();
-            lblAantalFouten.Content = "0";
-            controlsServices.Labels.Clear();
-            controlsServices.Buttons.Clear();
-            gezochtWoord = WoordServices.RandomWoord();
-            MaakButtons();
-            MaakLabels();
-            txtInput.Text = "";
-            NieuwSpel = new GameEngine(gezochtWoord);
-            imgGalg.Source = NieuwSpel.GalgOpbouwen();
-        }
 
-        private void btnNederlands_Click(object sender, RoutedEventArgs e)
-        {
-            ResetGame();
-        }
     }
 }

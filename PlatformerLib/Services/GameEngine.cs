@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
 namespace GalgjeLib.Services
@@ -32,7 +34,7 @@ namespace GalgjeLib.Services
             return new BitmapImage(new Uri(System.IO.Path.Combine(Environment.CurrentDirectory,"Images", Level + ".png")));
         }
 
-        public int[] Character(char ch)
+        public int[] Character(char ch,Label info)
         {
             int[] WoordLengte = new int[Word.Length];
 
@@ -51,6 +53,13 @@ namespace GalgjeLib.Services
             if (WoordLengte.Count(i => i == 1) == 0)
             {
                 Level++;
+                info.Content = "Foute letter!";
+                info.Background = Brushes.Brown;
+            }
+            else
+            {
+                info.Content = "Juiste letter!";
+                info.Background = Brushes.LawnGreen;
             }
 
             return WoordLengte;
