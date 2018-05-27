@@ -13,6 +13,7 @@ namespace GalgjeLib.Services
     public class WoordServices
     {
         public static List<Woord> woorden;
+        public static List<Woord> nederlandseWoorden;
 
         static public string RandomWoord()
         {
@@ -23,8 +24,18 @@ namespace GalgjeLib.Services
             return woorden[wilkeur.Next(0, woorden.Length - 1)];
         }
 
+        static public string NederlandsWoord()
+        {
+            TextReader tr = new StreamReader(@"nederlandsewoorden.txt");
+            string woordLijst = tr.ReadToEnd();
+            string[] woorden = woordLijst.Split('\n');
+            Random wilkeur = new Random();
+            return woorden[wilkeur.Next(0, woorden.Length - 1)];
+        }
+
+
 
     }
-    
+
 
 }

@@ -52,7 +52,8 @@ namespace Galgje
             ResetGame();
             wrpLettersWrap.IsEnabled = true;
             txtInput.Text = "";
-            
+            gezochtWoord = WoordServices.NederlandsWoord();
+
 
 
         }
@@ -64,7 +65,7 @@ namespace Galgje
             lblAantalFouten.Content = "0";
             controlsServices.Labels.Clear();
             controlsServices.Buttons.Clear();
-            gezochtWoord = WoordServices.RandomWoord();
+            gezochtWoord = WoordServices.NederlandsWoord();
             MaakButtons();
             MaakLabels();
             NieuwSpel = new GameEngine(gezochtWoord);
@@ -90,7 +91,17 @@ namespace Galgje
 
         private void btnStart_Click(object sender, RoutedEventArgs e)
         {
-            ResetGame();
+            wrpGezochtWoord.Children.Clear();
+            wrpLettersWrap.Children.Clear();
+            lblAantalFouten.Content = "0";
+            controlsServices.Labels.Clear();
+            controlsServices.Buttons.Clear();
+            gezochtWoord = txtInput.Text + "A"; // <---- Deze A zet ik hier, omdat de code altijd 1 character verwijderd aan het einde, om de lijst te kunnen lezen
+            MaakButtons();
+            MaakLabels();
+            txtInput.Text = "";
+            NieuwSpel = new GameEngine(gezochtWoord);
+            imgGalg.Source = NieuwSpel.GalgOpbouwen();
         }
 
 
@@ -161,6 +172,21 @@ namespace Galgje
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            wrpGezochtWoord.Children.Clear();
+            wrpLettersWrap.Children.Clear();
+            lblAantalFouten.Content = "0";
+            controlsServices.Labels.Clear();
+            controlsServices.Buttons.Clear();
+            gezochtWoord = WoordServices.RandomWoord();
+            MaakButtons();
+            MaakLabels();
+            txtInput.Text = "";
+            NieuwSpel = new GameEngine(gezochtWoord);
+            imgGalg.Source = NieuwSpel.GalgOpbouwen();
+        }
+
+        private void btnNederlands_Click(object sender, RoutedEventArgs e)
         {
             ResetGame();
         }
