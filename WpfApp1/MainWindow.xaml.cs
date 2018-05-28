@@ -40,7 +40,7 @@ namespace Galgje
         public GameEngine NieuwSpel;
         WoordServices WilkeurigWoord = new WoordServices();
         ControlsServices controlsServices = new ControlsServices();
-        public string gezochtWoord =  "Galgje";
+        public string gezochtWoord =  "Galg ";
         List<Label> labels = new List<Label>();
         List<Button> buttons = new List<Button>();
 
@@ -57,7 +57,9 @@ namespace Galgje
         public void ResetGame()
         {
             wrpGezochtWoord.Children.Clear();
-            wrpLettersWrap.Children.Clear(); 
+            wrpLettersWrap.Children.Clear();
+            lblInfo.Content = "";
+            lblInfo.Background = Brushes.White;
             lblAantalFouten.Content = "0";
             controlsServices.Labels.Clear();
             controlsServices.Buttons.Clear();
