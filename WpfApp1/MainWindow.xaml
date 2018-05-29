@@ -8,7 +8,7 @@
         Title="Galgje" Height="450" Width="800">
     <Grid>
         <WrapPanel x:Name="wrpLettersWrap" HorizontalAlignment="Left" Height="130" Margin="2,279,0,0" VerticalAlignment="Top" Width="386" Grid.Column="1"/>
-        <TextBox x:Name="txtInput" HorizontalAlignment="Left" Height="36" Margin="500,326,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="142"/>
+        <TextBox x:Name="txtInput" HorizontalAlignment="Left" Height="36" Margin="500,326,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="142" KeyDown="txtInput_KeyDown"/>
         <Label x:Name="lblTeRadenWoord" Content="Het te raden &#xD;&#xA;woord:" HorizontalAlignment="Left" Height="48" Margin="423,325,0,0" VerticalAlignment="Top" Width="77"/>
         <Button x:Name="btnZelfgekozenWoord" Content="Zelfgekozen&#xD;&#xA;woord" HorizontalAlignment="Left" Height="37" Margin="647,325,0,0" VerticalAlignment="Top" Width="122" Click="BtnZelfgekozenWoord_Click"/>
         <WrapPanel x:Name="wrpGezochtWoord" HorizontalAlignment="Left" Height="56" Margin="3,21,0,0" VerticalAlignment="Top" Width="766" Grid.Column="1"/>

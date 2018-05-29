@@ -106,8 +106,10 @@ namespace Galgje
         void BtnZelfgekozenWoord_Click(object sender, RoutedEventArgs e)
         {
             gezochtWoord = txtInput.Text + "A"; // <---- Deze A zet ik hier, omdat de code altijd 1 character verwijderd aan het einde, om de lijst te kunnen lezen
+            txtInput.Text = "";
             ResetGame();
         }
+
 
         void BtnEngels_Click(object sender, RoutedEventArgs e)
         {
@@ -163,6 +165,15 @@ namespace Galgje
 
         }
 
-
+        private void txtInput_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key >= Key.A && e.Key <= Key.Z)
+            {
+            }
+            else
+            {
+                e.Handled = true;
+            }
+        }
     }
 }
