@@ -150,7 +150,7 @@ namespace Galgje
 
 
 
-            if (controlsServices.antwoordCorrect == false )
+            if (controlsServices.AntwoordCorrect == false )
             {
                 GameEnd("Winner"); 
             }

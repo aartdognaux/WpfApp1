@@ -17,7 +17,7 @@ namespace GalgjeLib.Services
         public Button StartNewGame { get; set; }
         public Button RestartNewGame { get; set; }
         public List<Label> Labels { get; set; }
-        public bool antwoordCorrect { get; set; }
+        public bool AntwoordCorrect { get; set; }
         public ControlsServices()
         {
             Buttons = new List<Button>();
@@ -41,20 +41,20 @@ namespace GalgjeLib.Services
 
         public bool ControleerLabels()
         {
-            antwoordCorrect = true;
+            AntwoordCorrect = true;
             foreach (Label label in Labels)
             {
                 if ((string)label.Content == "_")
                 {
-                    antwoordCorrect = true;
+                    AntwoordCorrect = true;
                     break;
                 }
                 else
                 {
-                    antwoordCorrect = false;
+                    AntwoordCorrect = false;
                 }   
             }
-            return antwoordCorrect;
+            return AntwoordCorrect;
 
 
 
@@ -103,7 +103,6 @@ namespace GalgjeLib.Services
             gridDoel.Children.Add(Galgje);
 
             Button StartSpel = new Button();
-           
             StartSpel.Height = 50;
             StartSpel.Width = 200;
             StartSpel.Content = "New Game";
@@ -141,7 +140,6 @@ namespace GalgjeLib.Services
             gridDoel.Children.Add(Galgje);
 
             Button StartSpel = new Button();
-
             StartSpel.Height = 50;
             StartSpel.Width = 300;
             StartSpel.Content = "Restart New Game";
