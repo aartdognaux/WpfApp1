@@ -94,7 +94,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\PlatformerLib\GalgjeLib.csproj">
+    <ProjectReference Include="..\GalgjeLib\GalgjeLib.csproj">
       <Project>{884efc27-d050-450b-bde9-6a08c49b8aa7}</Project>
       <Name>GalgjeLib</Name>
     </ProjectReference>
