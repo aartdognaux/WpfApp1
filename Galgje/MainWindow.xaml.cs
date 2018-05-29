@@ -137,8 +137,6 @@ namespace Galgje
                 if (a[i] == 1)
                 {
                     controlsServices.Labels[i].Content = NieuwSpel.Word[i].ToString();
-                    lblInfo.Content = "Juiste letter!";
-                    lblInfo.Background = Brushes.LawnGreen;
                 }
 
 
@@ -157,10 +155,6 @@ namespace Galgje
             else if (NieuwSpel.GameOver())
             {
                 GameEnd("You hang!");
-            }
-            else
-            {
-                (sender as Button).IsEnabled = false;
             }
 
         }
